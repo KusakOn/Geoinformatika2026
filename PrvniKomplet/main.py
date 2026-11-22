@@ -8,6 +8,7 @@ import naive_search
 import voxel_grid
 import kd_tree
 import r_tree
+import r_tree_library
 import octree
 
 def loadPoints(file):
@@ -163,6 +164,7 @@ drawPoints(X, Y, Z, 0, 0.2)
 run_naive = True
 use_octree = True
 use_rtree = True
+use_rtree_library = True
 
 
 #Spatial indices (data preparation fo r naive search, voxel grid and the kd-tree (AI generated for cleaner data preparation and integration with the rest of the code))
@@ -184,6 +186,9 @@ if use_octree:
 if use_rtree:
     rtree = r_tree.R_Tree(X, Y, Z)
 
+if use_rtree_library:
+    rtree_l = r_tree_library.R_tree_library(X,Y,Z)
+
 #Three search functions, every one returns for the point i its k nearest neighbors
 search_naive = lambda i, k: naive_search.getKNN(i, X, Y, Z, k)
 search_voxel = lambda i, k: voxel_grid.searchVoxels(i, X, Y, Z, k, H, J, n_r)
@@ -195,6 +200,8 @@ if use_octree:
 if use_rtree:
     search_rtree = lambda i, k: rtree.find_neighbours(i, k, X, Y, Z)
 
+if use_rtree_library:
+    search_rtree_l = lambda i, k:rtree_l.find_neighbours(i,k,X,Y,Z)
 
 #Calculation of spatial density for each method
 print("Spatial density:")
