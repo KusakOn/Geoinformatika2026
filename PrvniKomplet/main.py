@@ -159,10 +159,10 @@ print("Number of points:", n)
 #Draw points
 drawPoints(X, Y, Z, 0, 0.2)
 
-#Methods: the naive search takes about 2 minutes, Octree and Rtree are just prepared for possible implementation
+#Methods: the naive search takes about 2 minutes
 run_naive = True
-use_octree = False
-use_rtree = False
+use_octree = True
+use_rtree = True
 
 
 #Spatial indices (data preparation fo r naive search, voxel grid and the kd-tree (AI generated for cleaner data preparation and integration with the rest of the code))
