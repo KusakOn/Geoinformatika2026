@@ -229,6 +229,12 @@ if use_rtree:
     d_aver, rho = computeDensity(X, Y, Z, search_rtree)
     print("  R-tree:        d_aver = %.6f   rho = %.4f   time = %.3f s" % (d_aver, rho, time() - t))
 
+if use_rtree_library:
+    t = time()
+    d_aver, rho = computeDensity(X, Y, Z, search_rtree_l)
+    print("  R-tree from library:        d_aver = %.6f   rho = %.4f   time = %.3f s" % (d_aver, rho, time() - t))
+
+
 #Curvature: kappa = l1 / (l1 + l2 + l3)
 k = 30
 
@@ -251,6 +257,11 @@ if use_rtree:
     t = time()
     kappa_rtree = computeCurvature(X, Y, Z, search_rtree, k)
     print("R-tree:      time = %.3f s" % (time() - t))
+
+if use_rtree_library:
+    t = time()
+    kappa_rtree = computeCurvature(X, Y, Z, search_rtree_l, k)
+    print("R-tree from library:      time = %.3f s" % (time() - t))
 
 print("maximal difference of the curvatures:", abs(kappa_voxel - kappa_kd).max())
 
