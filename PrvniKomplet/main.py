@@ -7,7 +7,8 @@ import os
 import naive_search
 import voxel_grid
 import kd_tree
-
+import r_tree
+import octree
 
 def loadPoints(file):
     #Load file
@@ -177,11 +178,11 @@ tree = kd_tree.KDTree([X, Y, Z], 16)
 
 #Octree: the box of the points is divided to 8 equal boxes until a leaf has at most 16 points
 if use_octree:
-    otree = octree.Octree([X, Y, Z], 16)
+    otree = octree.Octree(X, Y, Z)
 
 #R-tree: near points are grouped to nodes with a min-max box 16 items in a node at most
 if use_rtree:
-    rtree = r_tree.RTree([X, Y, Z], 16)
+    rtree = r_tree.R_Tree(X, Y, Z)
 
 #Three search functions, every one returns for the point i its k nearest neighbors
 search_naive = lambda i, k: naive_search.getKNN(i, X, Y, Z, k)
@@ -189,10 +190,10 @@ search_voxel = lambda i, k: voxel_grid.searchVoxels(i, X, Y, Z, k, H, J, n_r)
 search_kd = lambda i, k: tree.query(i, k)
 
 if use_octree:
-    search_octree = lambda i, k: otree.query(i, k)
+    search_octree = lambda i, k: otree.find_neighbours(i, k, X, Y, Z)
 
 if use_rtree:
-    search_rtree = lambda i, k: rtree.query(i, k)
+    search_rtree = lambda i, k: rtree.find_neighbours(i, k, X, Y, Z)
 
 
 #Calculation of spatial density for each method
