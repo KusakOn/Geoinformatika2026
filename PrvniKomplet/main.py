@@ -11,13 +11,16 @@ import r_tree
 import r_tree_library
 import octree
 
-def loadPoints(file):
-    #Load file
+def loadPoints(file, max_points = None):
+    #Load file, at most max_points points (None = all points)
     X, Y, Z = [], [], [] ;
 
     with open(file) as f:
 
         for line in f:
+            if max_points is not None and len(X) >= max_points:
+                break
+
             x, y, z = line.split('\t')
 
             X.append(float(x))
@@ -153,6 +156,7 @@ def computeCurvature(X, Y, Z, search, k = 30):
 
 #Load points
 folder = os.path.dirname(os.path.abspath(__file__))
+max_point = None #Select the number of points taken into consederation for calcunation, None = load all points
 X, Y, Z = loadPoints(os.path.join(folder, "tree_18.txt"))
 n = len(X)
 print("Number of points:", n)
