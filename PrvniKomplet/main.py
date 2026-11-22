@@ -182,11 +182,11 @@ x_min, y_min, z_min, dx, dy, dz = box
 #kd-tree: the points are divided by the median in the axes x, y, z, x,... until a leaf has at most 16 points
 tree = kd_tree.KDTree([X, Y, Z], 16)
 
-#Octree: the box of the points is divided to 8 equal boxes until a leaf has at most 16 points
+#Octree: the box of the points is divided to 8 equal boxes until a leaf has at most 30 points
 if use_octree:
     otree = octree.Octree(X, Y, Z)
 
-#R-tree: near points are grouped to nodes with a min-max box 16 items in a node at most
+#R-tree: near points are grouped to nodes with a min-max box 30 items in a node at most
 if use_rtree:
     rtree = r_tree.R_Tree(X, Y, Z)
 
