@@ -124,4 +124,4 @@ vytvor_graf(X_osa, OC, "Octree","graf_OC.svg" )
 vytvor_graf(X_osa, R, "R-tree","graf_R.svg" )
 vytvor_graf(X_osa, LIB, "Knihovní R-tree","graf_LIB.svg" )
 
-print (NA, VOX, KD, OC, R, LIB, sep = "/n")
+print (NA, VOX, KD, OC, R, LIB, sep = "\n")
